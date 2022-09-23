@@ -63,6 +63,9 @@ class SongController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('errore', $e->getMessage());
         }
+        finally{
+            
+        }
     }
 
     public function delete($id)

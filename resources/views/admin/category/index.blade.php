@@ -27,7 +27,7 @@
                 @foreach ($categories as $i=>$post)
                     <tr>
                       <th>
- {{$i+1}}
+                               {{$i+1}}
                       </th>
                         <th>
                             <a href="#" class="" data-pjax>{{ $post->title }}</a>
