@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Setting;
+use App\Models\Song;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +24,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index', ['title' => 'Chhavinirman - Social Media graphics']);
+        $data = array();
+
+        $data['songs'] = Song::orderBy('id', 'desc')->take(20)->get();
+        $data['site_url'] = Setting::where("property", "site_url")->first()->value;
+        $data['site_title'] = Setting::where("property", "site_title")->first()->value;
+        $data['categories'] = Category::orderBy('id', 'desc')->take(10)->get();
+        $data['popular'] = Song::orderBy('views', 'desc')->take(10)->get();
+
+        return view('index', $data);
     }
 
     public function logout_user()

@@ -20,11 +20,16 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/login', [App\Http\Controllers\HomeController::class, 'login'])->name('login');
 Route::post('/authenticate', [App\Http\Controllers\HomeController::class, 'authenticate'])->name('authenticate');
 
+Route::get('/about-us', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
+Route::get('/contact-us', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
+Route::get('/desclaimer', [App\Http\Controllers\HomeController::class, 'desclaimer'])->name('disclaimer');
 Route::get('/terms-and-conditions', [App\Http\Controllers\HomeController::class, 'terms'])->name('terms');
 Route::get('/privacy-policy', [App\Http\Controllers\HomeController::class, 'privacy'])->name('privacy');
 
-Route::get('/song/{slug}', [App\Http\Controllers\SongController::class, 'show'])->name('show_song');
-Route::get('/category/{slug}', [App\Http\Controllers\CategoryController::class, 'show'])->name('show_category');
+
+Route::get('/song/{id}/{slug}', [App\Http\Controllers\SongController::class, 'show'])->name('admin.song.show');
+Route::get('/track/{id}/{slug}', [App\Http\Controllers\CategoryController::class, 'show'])->name('admin.category.show');
+Route::get('/search', [App\Http\Controllers\CategoryController::class, 'search'])->name('admin.song.search');
 
 
 Route::prefix('admin')->middleware('auth')->group(function () {

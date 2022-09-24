@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Setting;
 use App\Models\Song;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SongController extends Controller
 {
@@ -25,14 +27,27 @@ class SongController extends Controller
         return view('admin.song.create', $data);
     }
 
-    public function show($slug)
+    public function show($id, $title)
     {
-        $title = str_replace('-', ' ', $slug);
+
         $data = array();
-        $data['song'] = Song::where('title', $title)->first();
+        $data['song'] = Song::find($id);
+        $data['site_url'] = Setting::where("property", "site_url")->first()->value;
+        $data['site_title'] = Setting::where("property", "site_title")->first()->value;
+        $data['categories'] = Category::orderBy('id', 'desc')->take(10)->get();
+        $data['related'] = Song::where('category_id', Song::find($id)->category_id)->orderBy('id', 'desc')->take(10)->get();
         return view('admin.song.show', $data);
     }
+    public function search()
+    {
+        $query = request("q");
 
+        $data = array();
+        $data['songs'] = DB::table('songs')->where('title', 'LIKE', "%$query%")->get();
+        $data['site_url'] = Setting::where("property", "site_url")->first()->value;
+        $data['site_title'] = Setting::where("property", "site_title")->first()->value;
+        return view('admin.category.show', $data);
+    }
     public function store()
     {
         try {
@@ -62,9 +77,7 @@ class SongController extends Controller
             return redirect()->back()->with('success', 'Uploaded Successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('errore', $e->getMessage());
-        }
-        finally{
-            
+        } finally {
         }
     }
 
