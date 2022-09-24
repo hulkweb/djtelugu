@@ -44,8 +44,8 @@
 <body>
     <nav class="navbar">
         <div class="navigation">
-            <section class="_Logo"><a class="logo" href="{{ $site_url }}" title="DJtelugu.com"
-                    rel="bookmark">{{ $site_title }}</a></section>
+            <section class="_Logo"><a class="" href="{{ $site_url }}" title="DJtelugu.com"
+                    rel="bookmark" style="font-size: 30px;color:white;font-family:fantasy;padding:10px ">{{ $site_title }}</a></section>
         </div>
     </nav>
 
@@ -133,13 +133,8 @@
         });
     </script>
 
-    <div id='fixedban'
-        style='width:100%;margin:auto;text-align:center;float:none;overflow:hidden;display:scroll;position:fixed;bottom:0;z-index:999;-webkit-transform:translateZ(0);'>
-
-        <div>
-
-
-        </div>
+ 
+       <br><br>br
         <div class="footer text-center">
             <div><a href="{{ route('privacy') }}">Privacy Policy</a> | <a href="{{ route('terms') }}">Terms of
                     Condition</a> | <a href="{{ route('disclaimer') }}">Disclaimer</a> | <a
@@ -149,5 +144,5 @@
             <a href="/">©2017 - 2022 {{ $site_title }}</a>
             <div class="smalltext">Powered By : AlldjsMashup Records</div>
         </div>
-
+</body>
 </html>

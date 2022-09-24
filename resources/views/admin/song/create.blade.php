@@ -14,7 +14,7 @@
                     <label>Choose category</label> <br>
                     <select name="category_id" class="form-control" id="">
                         @foreach ($categories as $item)
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            <option value="{{ $item->id }}">{{ $item->title }}</option>
                         @endforeach
                     </select>
                 </div>

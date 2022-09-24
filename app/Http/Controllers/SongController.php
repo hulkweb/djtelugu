@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Setting;
 use App\Models\Song;
+use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,7 +27,16 @@ class SongController extends Controller
         $data['categories'] = Category::all();
         return view('admin.song.create', $data);
     }
+    public function download($id)
+    {
 
+
+        $song = Song::find($id);
+        $audio_file = $song->audio_file;
+        $song->downloads = $song->downloads + 1;
+        $song->save();
+        return response()->download("uploads/audios/$audio_file", "$audio_file");
+    }
     public function show($id, $title)
     {
 
@@ -41,11 +51,14 @@ class SongController extends Controller
     public function search()
     {
         $query = request("q");
-
         $data = array();
+        $data['popular'] = Song::orderBy('views', 'desc')->take(10)->get();
+
         $data['songs'] = DB::table('songs')->where('title', 'LIKE', "%$query%")->get();
         $data['site_url'] = Setting::where("property", "site_url")->first()->value;
         $data['site_title'] = Setting::where("property", "site_title")->first()->value;
+        $data['categories'] = Category::orderBy('id', 'desc')->take(10)->get();
+
         return view('admin.category.show', $data);
     }
     public function store()

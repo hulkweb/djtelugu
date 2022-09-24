@@ -28,8 +28,10 @@ Route::get('/privacy-policy', [App\Http\Controllers\HomeController::class, 'priv
 
 
 Route::get('/song/{id}/{slug}', [App\Http\Controllers\SongController::class, 'show'])->name('admin.song.show');
+Route::get('/artist/{id}/{slug}', [App\Http\Controllers\ArtistController::class, 'show'])->name('admin.artist.show');
+Route::get('/download/{id}/{slug}', [App\Http\Controllers\SongController::class, 'download'])->name('admin.song.download');
 Route::get('/track/{id}/{slug}', [App\Http\Controllers\CategoryController::class, 'show'])->name('admin.category.show');
-Route::get('/search', [App\Http\Controllers\CategoryController::class, 'search'])->name('admin.song.search');
+Route::get('/search', [App\Http\Controllers\SongController::class, 'search'])->name('admin.song.search');
 
 
 Route::prefix('admin')->middleware('auth')->group(function () {
@@ -52,6 +54,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/keyword/create', [App\Http\Controllers\KeywordController::class, 'create'])->name('admin.keyword.create');
     Route::post('/keyword/store', [App\Http\Controllers\KeywordController::class, 'store'])->name('admin.keyword.store');
+    Route::get('/keyword/create_video', [App\Http\Controllers\KeywordController::class, 'create_video'])->name('admin.keyword.create_video');
+    Route::post('/keyword/video', [App\Http\Controllers\KeywordController::class, 'video'])->name('admin.keyword.video');
+
+    Route::get('/artist/index', [App\Http\Controllers\ArtistController::class, 'index'])->name('admin.artist.index');
+    Route::get('/artist/create', [App\Http\Controllers\ArtistController::class, 'create'])->name('admin.artist.create');
+    Route::post('/artist/store', [App\Http\Controllers\ArtistController::class, 'store'])->name('admin.artist.store');
+    Route::get('/artist/delete/{id}', [App\Http\Controllers\ArtistController::class, 'delete'])->name('admin.artist.delete');
 
     Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('admin.category.index');
     Route::get('/category/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('admin.category.create');

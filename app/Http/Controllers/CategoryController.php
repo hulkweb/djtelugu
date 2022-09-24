@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Setting;
+use App\Models\Song;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -20,11 +22,15 @@ class CategoryController extends Controller
         return view('admin.category.create', $data);
     }
 
-    public function show($slug)
+    public function show($id)
     {
-        $title = str_replace('-', ' ', $slug);
         $data = array();
-        $data['category'] = Category::where('title', $title)->first();
+        $data['popular'] = Song::orderBy('views', 'desc')->take(10)->get();
+
+        $data['songs'] = Song::where('category_id', $id)->get();
+        $data['categories'] = Category::all();
+        $data['site_url'] = Setting::where("property", "site_url")->first()->value;
+        $data['site_title'] = Setting::where("property", "site_title")->first()->value;
         return view('admin.category.show', $data);
     }
 

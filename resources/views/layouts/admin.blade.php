@@ -62,7 +62,7 @@
             justify-content: center;
         }
 
-        @keyframes breath {
+        /* @keyframes breath {
             0% {
                 transform: scale(1)
             }
@@ -74,7 +74,7 @@
             100% {
                 transform: scale(1)
             }
-        }
+        } */
     </style>
 
 </head>
@@ -107,7 +107,17 @@
 
                                 <span>
                                     <i class="fas fa-file-alt fa-fw"></i>
-                                    Create Keyword
+                                    Upload BY Playlist ID
+
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/keyword/create_video" class="nav-link" title="Invoices" data-pjax>
+
+                                <span>
+                                    <i class="fas fa-file-alt fa-fw"></i>
+                                    Upload BY Video ID
 
                                 </span>
                             </a>
@@ -318,6 +328,7 @@
             <span>
                 <img src="/assets/preloader.gif" height="80" id="loader" alt="">
             </span>
+            
             <p>Please Wait....</p>
         </div>
     </div>
