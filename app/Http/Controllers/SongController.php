@@ -15,7 +15,17 @@ class SongController extends Controller
     {
         try {
             $data = array();
-            $data['songs'] = Song::all();
+            $data['songs'] = Song::orderBy('id','desc')->take(20)->get();
+            return view('admin.song.index', $data);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('errore', $e->getMessage());
+        }
+    }
+    public function latest()
+    {
+        try {
+            $data = array();
+            $data['songs'] = Song::orderBy('id', 'desc')->take(20)->get();
             return view('admin.song.index', $data);
         } catch (\Exception $e) {
             return redirect()->back()->with('errore', $e->getMessage());
@@ -41,7 +51,10 @@ class SongController extends Controller
     {
 
         $data = array();
-        $data['song'] = Song::find($id);
+        $song = Song::find($id);
+        $song->views = $song->views + 1;
+        $song->save();
+        $data['song'] = $song;
         $data['site_url'] = Setting::where("property", "site_url")->first()->value;
         $data['site_title'] = Setting::where("property", "site_title")->first()->value;
         $data['categories'] = Category::orderBy('id', 'desc')->take(10)->get();

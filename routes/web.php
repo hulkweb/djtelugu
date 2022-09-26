@@ -26,7 +26,7 @@ Route::get('/desclaimer', [App\Http\Controllers\HomeController::class, 'desclaim
 Route::get('/terms-and-conditions', [App\Http\Controllers\HomeController::class, 'terms'])->name('terms');
 Route::get('/privacy-policy', [App\Http\Controllers\HomeController::class, 'privacy'])->name('privacy');
 
-
+Route::get('/latest', [App\Http\Controllers\SongController::class, 'latest'])->name('admin.song.latest');
 Route::get('/song/{id}/{slug}', [App\Http\Controllers\SongController::class, 'show'])->name('admin.song.show');
 Route::get('/artist/{id}/{slug}', [App\Http\Controllers\ArtistController::class, 'show'])->name('admin.artist.show');
 Route::get('/download/{id}/{slug}', [App\Http\Controllers\SongController::class, 'download'])->name('admin.song.download');

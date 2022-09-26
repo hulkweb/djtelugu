@@ -60,7 +60,7 @@
 
 
             <h2 class="heading"><i class="fa fa-file-audio-o" aria-hidden="true"></i> Latest Singles <a
-                    class="morbtn f-right" href="{{ $site_url }}/lastadded">More+</a></h2>
+                    class="morbtn f-right" href="{{ $site_url }}/latest">More+</a></h2>
             <div id="dle-content">
                 @foreach ($songs as $song)
                     <a href="{{ $site_url }}/song/{{ $song->id }}/{{ str_replace(' ', '-', $song->title) }}">
@@ -105,7 +105,7 @@
             <div class="heading"><i class="fa fa-facebook-square" aria-hidden="true"></i> Follow Facebook</div>
             <div class="clearDiv"></div>
             <h2 class="heading"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Popular Today's</h2>
-            @foreach ($popular as $item)
+            @foreach ($popular as $song)
                 <div class="fl odd">
                     <a
                         href="{{ $site_url }}/track/{{ $song->id }}/{{ str_replace(' ', '-', $song->title) }}">
@@ -134,7 +134,7 @@
     </script>
 
  
-       <br><br>br
+       <br><br>
         <div class="footer text-center">
             <div><a href="{{ route('privacy') }}">Privacy Policy</a> | <a href="{{ route('terms') }}">Terms of
                     Condition</a> | <a href="{{ route('disclaimer') }}">Disclaimer</a> | <a

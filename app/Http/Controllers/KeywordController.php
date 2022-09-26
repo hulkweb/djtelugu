@@ -32,13 +32,17 @@ class KeywordController extends Controller
 
     public function video()
     {
-        $videoId = request('video_id');
+        
+        $video_link = request('video_id');
+        preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $video_link, $match);
+        $video_id =  $match[1];
+
 
         $category_id = request('category_id');
-
-
-        // $this->downloadYoutube($video_id);
-        // $this->save_to_db($video);
+        $video = $this->get_video($video_id);
+        $video['category_id'] = $category_id;
+        $this->downloadYoutube($video_id, $video['image_file']);
+        $this->save_to_db($video);
         return redirect()->back()->with('success', " Posts Uploaded  Successfully");
     }
 
@@ -46,11 +50,12 @@ class KeywordController extends Controller
     public function store()
     {
         $count = 0;
-        $keyword = request('keyword');
+        $playlist_link = request('keyword');
+        $playlist_id = substr(explode("list=", $playlist_link)[1], 0, 43);
         $results = request('results');
         $category_id = request('category_id');
 
-        $videos = $this->get_videos($keyword, $results);
+        $videos = $this->get_videos($playlist_id, $results);
 
 
         foreach ($videos as $video) {
@@ -88,12 +93,12 @@ class KeywordController extends Controller
 
 
 
-    public function get_videos($keyword, $results)
+    public function get_videos($playlist_id, $results)
     {
         $videos = array();
         $apiKey = Setting::where('property', 'api_key')->first()->value;
         // $apiKey = "AIzaSyAq4ij7a8PeBBtxtnxOuRA8acoBX8McQcI";
-        $reponse = Http::get("https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=$results&playlistId=$keyword&key=$apiKey");
+        $reponse = Http::get("https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=$results&playlistId=$playlist_id&key=$apiKey");
         if ($reponse) {
             $items =  json_decode($reponse)->items;
             foreach ($items as $item) {
@@ -108,6 +113,25 @@ class KeywordController extends Controller
             }
         }
         return $videos;
+    }
+
+    public function get_video($video_id)
+    {
+        $videos = array();
+        $apiKey = Setting::where('property', 'api_key')->first()->value;
+        // $apiKey = "AIzaSyAq4ij7a8PeBBtxtnxOuRA8acoBX8McQcI";
+        $reponse = Http::get("https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=$video_id&key=$apiKey");
+        if ($reponse) {
+            $items =  json_decode($reponse)->items;
+            foreach ($items as $item) {
+                $video = array();
+                $video['video_id'] = $video_id;
+                $video['title'] = $item->snippet->title;
+                $video['description'] = $item->snippet->description;
+                $video['image_file'] = $item->snippet->thumbnails->default->url;
+            }
+        }
+        return $video;
     }
 
     public function downloadYoutube($videoId, $thumbnail)

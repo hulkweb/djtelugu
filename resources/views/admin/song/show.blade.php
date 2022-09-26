@@ -71,6 +71,11 @@
                             href="{{ $site_url }}/track/{{ $song->category->id }}/{{ $song->category->title }}">Hindi
                             New Dj Remix
                             Song</a></span></p>
+            <p> 
+                 <b style="padding: 10px 30px"> views &nbsp;({{$song->views}})  </b>
+                 <b style="padding: 10px 30px"> downloads&nbsp;({{$song->downloads}})  </b>
+
+            </p>
                 <p class="sharebtn">
                     <span
                         onclick="window.location='whatsapp://send?text=*1st%20On%20Net:-%20Hey%20Bro%20Song%20Dj%20Remix%20From:-%20AllDjsMashup*%20{{ $site_url }}/song/{{ $song->id }}/{{ str_replace(' ', '-', $song->title) }}'"

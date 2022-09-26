@@ -58,19 +58,37 @@ class HomeController extends Controller
         return redirect('/login')->with('errore', 'Incorrect Credentials');
     }
     public function terms()
-    {
-        return view('terms', ['title' => 'Terms And Conditions | Chhavinirman']);
+    { $data = array();
+        $data['site_url'] = Setting::where("property", "site_url")->first()->value;
+        $data['site_title'] = "Terms And Conditions";
+        return view('terms', $data);
     }
     public function login()
     {
-        return view('admin.login', ['title' => 'Terms And Conditions | Chhavinirman']);
+        return view('admin.login', ['title' => 'login']);
     }
     public function privacy()
-    {
-        return view('privacy', ['title' => 'Privacy Policy | Chhavinirman']);
+    {    $data = array();
+        $data['site_url'] = Setting::where("property", "site_url")->first()->value;
+        $data['site_title'] = "Privacy Policy";
+        return view('privacy',  $data);
     }
-    public function refund()
-    {
-        return view('refund', ['title' => 'Refund policy | Chhavinirman']);
+    public function about()
+    {    $data = array();
+        $data['site_url'] = Setting::where("property", "site_url")->first()->value;
+        $data['site_title'] = "About Us";
+        return view('about',  $data);
+    }
+    public function desclaimer()
+    {    $data = array();
+        $data['site_url'] = Setting::where("property", "site_url")->first()->value;
+        $data['site_title'] = "Desclaimer";
+        return view('desclaimer',  $data);
+    }
+    public function contact()
+    {    $data = array();
+        $data['site_url'] = Setting::where("property", "site_url")->first()->value;
+        $data['site_title'] = "Reach Out to us";
+        return view('contact',  $data);
     }
 }

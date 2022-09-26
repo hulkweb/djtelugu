@@ -8,7 +8,7 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-sm-7">
-                        <label for="name">Keyword Name / Playlist Id</label>
+                        <label for="name">Youtube Playlist Link</label>
                         <input type="text" class="form-control" name="keyword" required>
                     </div>
 
