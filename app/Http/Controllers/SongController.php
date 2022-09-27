@@ -15,7 +15,7 @@ class SongController extends Controller
     {
         try {
             $data = array();
-            $data['songs'] = Song::orderBy('id','desc')->take(20)->get();
+            $data['songs'] = Song::orderBy('id', 'desc')->take(20)->get();
             return view('admin.song.index', $data);
         } catch (\Exception $e) {
             return redirect()->back()->with('errore', $e->getMessage());
@@ -26,7 +26,11 @@ class SongController extends Controller
         try {
             $data = array();
             $data['songs'] = Song::orderBy('id', 'desc')->take(20)->get();
-            return view('admin.song.index', $data);
+            $data['popular'] = Song::orderBy('views', 'desc')->take(6)->get();
+            $data['site_url'] = Setting::where("property", "site_url")->first()->value;
+            $data['site_title'] = Setting::where("property", "site_title")->first()->value;
+            $data['categories'] = Category::orderBy('id', 'desc')->take(10)->get();
+            return view('admin.category.show', $data);
         } catch (\Exception $e) {
             return redirect()->back()->with('errore', $e->getMessage());
         }
@@ -43,9 +47,10 @@ class SongController extends Controller
 
         $song = Song::find($id);
         $audio_file = $song->audio_file;
+        $title = $song->title;
         $song->downloads = $song->downloads + 1;
         $song->save();
-        return response()->download("uploads/audios/$audio_file", "$audio_file");
+        return response()->download("uploads/audios/$audio_file", "$title.mp3");
     }
     public function show($id, $title)
     {

@@ -8,7 +8,7 @@
     <meta name="robots" content="noindex">
     <meta name="server" content="app.spp.co">
     <!-- Favicon -->
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico">
 
     <title>
         Admin Portal | DjTelugu</title>
@@ -23,6 +23,10 @@
 
     <style type="text/css" data-css-vars>
         :root {}
+
+        i {
+            color: #015d6b
+        }
 
         #data .card,
         #data a {
@@ -84,10 +88,10 @@
 
     <div class="container-fluid">
         <div class="row">
-            <aside class="col sidebar" style="background: rgb(86,86,88);">
+            <aside class="col sidebar" style="background: #36B9CC;">
                 <div class="sidebar-sticky">
                     <a href="/admin" class="navbar-brand d-none d-sm-block" data-pjax="data-pjax">
-                        <img src="logo.png" height="70" alt="" class="bg-light rounded px-1">
+                        {{-- <img src="logo.png" height="70" alt="" class="bg-light rounded px-1"> --}}
                     </a>
 
                     <ul class="nav flex-column" role="navigation">
@@ -112,7 +116,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="/admin/keyword/create_video" class="nav-link" title="Invoices" data-pjax>
 
                                 <span>
@@ -121,7 +125,7 @@
 
                                 </span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item title">Songs</li>
                         <li class="nav-item">
                             <a href="{{ route('admin.song.index') }}" class="nav-link" title="songs" data-pjax>
@@ -134,7 +138,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.song.create') }}" class="nav-link" title="songs" data-pjax>
+                            <a href="/admin/keyword/create_video" class="nav-link" title="songs" data-pjax>
 
                                 <span>
                                     <i class="fas fa-music fa-fw"></i>
@@ -321,14 +325,14 @@
 
 
 
-    <script src="js/jquery.pjax.js?v=08-10"></script>
-    <script src="js/27-10/spp_clients.js"></script>
+    <script src="/js/jquery.pjax.js?v=08-10"></script>
+    <script src="/js/27-10/spp_clients.js"></script>
     <div id="preloader">
         <div id="container">
             <span>
                 <img src="/assets/preloader.gif" height="80" id="loader" alt="">
             </span>
-            
+
             <p>Please Wait....</p>
         </div>
     </div>

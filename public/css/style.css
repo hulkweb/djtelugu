@@ -1,8 +1,9 @@
+@import url(Poppins-Medium.ttf);
 body {
     margin: 0;
     background: #fff;
     color: #3e3e3e;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: Poppins;
     font-size: 15px
 }
 
@@ -370,9 +371,9 @@ h5 {
 }
 
 .heading {
-    background: #7905C0;
+    background: #c0056c;
     color: #fff;
-    border-left: 4px solid #d38aff;
+    border-left: 4px solid rgb(244, 125, 163);
     display: block;
     padding: 6px 12px;
     white-space: nowrap;

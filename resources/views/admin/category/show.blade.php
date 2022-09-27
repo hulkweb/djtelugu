@@ -42,19 +42,13 @@
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="navigation">
-            <section class="_Logo"><a class="" href="{{ $site_url }}" title="DJtelugu.com" rel="bookmark"
-                    style="font-size: 30px;color:white;font-family:fantasy;padding:10px ">{{ $site_title }}</a>
-            </section>
-        </div>
-    </nav>
+    @include('partials.header')
 
     <div class="clearDiv"></div>
     <div id="container">
         <div class="search">
-            <form method="get" action="{{route('admin.song.search')}}"><input type="text" name="q" value=""
-                    placeholder="Search Any Songs" /><button type="submit"
+            <form method="get" action="{{ route('admin.song.search') }}"><input type="text" name="q"
+                    value="" placeholder="Search Any Songs" /><button type="submit"
                     value="Search">Search</button></form>
         </div>
         <div id="mainData">
@@ -64,7 +58,7 @@
                     class="morbtn f-right" href="{{ $site_url }}/lastadded">More+</a></h2>
             <div id="dle-content">
                 @foreach ($songs as $song)
-                    <a href="{{ $site_url }}/song/{{ $song->id }}/{{ str_replace(' ', '-', $song->title) }}">
+                    <a href="{{ $site_url }}/song/{{ $song->id }}/{{ $song->slug }}">
                         <article class="movie-item movie-item1">
                             <div class="movie-cols movie-cols1 clearfix">
                                 <div class="movie-img movie-img1 img-box pseudo-link">
@@ -108,8 +102,7 @@
             <h2 class="heading"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Popular Today's</h2>
             @foreach ($popular as $song)
                 <div class="fl odd">
-                    <a
-                        href="{{ $site_url }}/track/{{ $song->id }}/{{ str_replace(' ', '-', $song->title) }}">
+                    <a href="{{ $site_url }}/track/{{ $song->id }}/{{ $song->slug }}">
                         <div>
                             <div> <img width="80" height="80" title="{{ ucfirst($song->title) }}"
                                     src="{{ $site_url }}/uploads/images/{{ $song->image_file }}"
@@ -125,26 +118,7 @@
         <div class="clearDiv"></div>
     </div>
 
-
-    <script type='text/javascript'>
-        $(document).ready(function() {
-            $('img#closed').click(function() {
-                $('#bl_banner').hide(90);
-            });
-        });
-    </script>
-
-
-    <br><br>br
-    <div class="footer text-center">
-        <div><a href="{{ route('privacy') }}">Privacy Policy</a> | <a href="{{ route('terms') }}">Terms of
-                Condition</a> | <a href="{{ route('disclaimer') }}">Disclaimer</a> | <a
-                href="{{ route('about') }}">About Us</a> |
-            <a href="{{ route('contact') }}">Contact Us</a>
-        </div>
-        <a href="/">©2017 - 2022 {{ $site_title }}</a>
-        <div class="smalltext">Powered By : AlldjsMashup Records</div>
-    </div>
+    @include('partials.footer')
 </body>
 
 </html>

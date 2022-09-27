@@ -43,12 +43,7 @@
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="navigation">
-            <section class="_Logo"><a class="" href="{{ $site_url }}" title="DJtelugu.com"
-                    rel="bookmark" style="font-size: 30px;color:white;font-family:fantasy;padding:10px ">DJtelugu</a></section>
-        </div>
-    </nav>
+    @include('partials.header')
 
     <div class="clearDiv"></div>
     <div id="container">
@@ -60,24 +55,8 @@
 
     </div>
 
-    <script type='text/javascript'>
-        $(document).ready(function() {
-            $('img#closed').click(function() {
-                $('#bl_banner').hide(90);
-            });
-        });
-    </script>
-
- 
+  
        <br><br>
-        <div class="footer text-center">
-            <div><a href="{{ route('privacy') }}">Privacy Policy</a> | <a href="{{ route('terms') }}">Terms of
-                    Condition</a> | <a href="{{ route('disclaimer') }}">Disclaimer</a> | <a
-                    href="{{ route('about') }}">About Us</a> |
-                <a href="{{ route('contact') }}">Contact Us</a>
-            </div>
-            <a href="/">©2017 - 2022 {{ $site_title }}</a>
-            <div class="smalltext">Powered By : AlldjsMashup Records</div>
-        </div>
+       @include('partials.footer')
 </body>
 </html>

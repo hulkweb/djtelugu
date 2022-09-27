@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('songs', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable()->default(null);
-            $table->string('description')->nullable()->default(null);
+            $table->mediumText('description')->nullable()->default(null);
             $table->string('image_file')->nullable()->default(null);
             $table->string('image_file_size')->nullable()->default(null);
             $table->string('image_file_extension')->nullable()->default(null);
@@ -34,7 +34,7 @@ return new class extends Migration
             $table->bigInteger('downloads')->nullable()->default(0);
             $table->bigInteger('likes')->nullable()->default(0);
             $table->string('duration')->nullable()->default(null);
-
+            $table->string('slug')->nullable()->default(null);
             $table->bigInteger('category_id')->unsigned()->nullable()->default(null);
             $table->index('category_id');
             $table->foreign('category_id')->references('id')->on('categories');

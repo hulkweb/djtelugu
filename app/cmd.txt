@@ -1,0 +1,6 @@
+nano app/Http/Controllers/KeywordController.php
+nano config/laravel-ffmpeg.php
+nano /var/www/mpbjym/harabharamp/vendor/athlon1600/youtube-downloader/src/DownloadOptions.php
+cd /var/www/mpbjym/harabharamp/
+
+nano resources/views/index.blade.php

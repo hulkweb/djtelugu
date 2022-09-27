@@ -21,7 +21,7 @@
                     <th>
                         <a href="#" class="" data-pjax>Audio</a>
                     </th>
-                    
+
                     <th>
                         <a href="#" class="" data-pjax>Category</a>
                     </th>
@@ -50,8 +50,8 @@
                         </th>
                         <th>
                             <Audio src="/uploads/audios/{{ $post->audio_file }}" controls>
-                         </Audio>
-                            
+                            </Audio>
+
                         </th>
                         <th>
                             <a href="#" class="" data-pjax>{{ $post->category->title }}</a>
@@ -63,7 +63,7 @@
                             <a href="#" class="" data-pjax>{{ $post->downloads }}</a>
                         </th>
                         <th>
-                            <a class="btn btn-danger m-1" href="/admin/post/delete/{{ $post->id }}"> <i
+                            <a class="btn btn-danger m-1" href="/admin/song/delete/{{ $post->id }}"> <i
                                     class="fa fa-trash"></i> </a>
 
                         </th>
